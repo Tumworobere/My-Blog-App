@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
-
-gem 'rubocop', '>= 1.0', '< 2.0'
-
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.1'
+ruby '3.0.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
+
+gem 'ffi'
+
+gem 'rails-controller-testing'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -67,13 +68,15 @@ group :development do
   # gem "spring"
 end
 
-group :test, :development do
-  gem 'rspec-rails', '~> 5.0.0'
-end
-
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+end
+
+gem 'rubocop', '>= 1.0', '< 2.0'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
 end
