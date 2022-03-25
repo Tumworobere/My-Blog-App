@@ -1,35 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  describe 'GET /index' do
-    before(:example) { get users_path }
+  it 'redirects to the Users page and checks the correct placeholder text and status' do
+    get '/users'
 
-    it 'checks if action returns a correct response status' do
-      expect(response).to have_http_status(:ok)
-    end
+    expect(response).to render_template(:index)
 
-    it 'checks if action rendered a correct template' do
-      expect(response).to render_template('index')
-    end
+    expect(response.body).to include('Here is a list of users')
 
-    it 'checks if correct placeholder text is shown' do
-      expect(response.body).to include('User Index')
-    end
+    expect(response).to have_http_status(200)
   end
 
-  describe 'GET /show' do
-    before(:example) { get user_path(10) }
+  it 'does not render a different template' do
+    get '/users'
 
-    it 'checks if action returns a correct response status' do
-      expect(response).to have_http_status(:ok)
-    end
+    expect(response).to_not render_template(:show)
+  end
 
-    it 'checks if action rendered a correct template' do
-      expect(response).to render_template('show')
-    end
+  it 'redirects to the User page and checks the correct placeholder text and status' do
+    get '/users/1'
 
-    it 'checks if correct placeholder text is shown' do
-      expect(response.body).to include('User Show')
-    end
+    expect(response).to render_template(:show)
+
+    expect(response.body).to include('Here is a user')
+
+    expect(response).to have_http_status(200)
+  end
+
+  it 'does not render a different template' do
+    get '/users/1'
+
+    expect(response).to_not render_template(:index)
   end
 end
