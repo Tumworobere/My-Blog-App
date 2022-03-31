@@ -32,7 +32,6 @@
   display: flex;
   flex-direction: row;
 }
-
 .user-info {
   display: inline;
   border: 1px solid black;
