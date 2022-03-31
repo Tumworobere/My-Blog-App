@@ -4,7 +4,6 @@
     <h2>User <%= @user.Name%></h2>
     <p>Number of posts: <%= @user.posts_counter%></p>
   </div>
-
   <div>
     <% @posts_list.each do |post| %>
       <ul class='posts'>
@@ -29,4 +28,3 @@
     <%end%>
   </div>
 </div>
-
