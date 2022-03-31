@@ -1,35 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  it 'redirects to the Posts page and checks the correct placeholder text and status' do
-    get '/users/1/posts'
+  describe 'GET /index' do
+    before(:each) { get '/users/:user_id/posts' }
 
-    expect(response).to render_template(:index)
+    it 'is a success' do
+      expect(response).to have_http_status(:ok)
+    end
 
-    expect(response.body).to include('Here is a list of posts for a given user')
+    it 'render a specific template' do
+      expect(response).to render_template('posts/index')
+    end
 
-    expect(response).to have_http_status(200)
+    it 'test placeholder inside template' do
+      expect(response.body).to include('show all posts of a user')
+    end
   end
+  describe 'GET /show' do
+    before(:each) { get '/users/:user_id/posts/55' }
 
-  it 'does not render a different template' do
-    get '/users/1/posts'
+    it 'is a success' do
+      expect(response).to have_http_status(:ok)
+    end
 
-    expect(response).to_not render_template(:show)
-  end
+    it 'render a specific template' do
+      expect(response).to render_template('posts/show')
+    end
 
-  it 'redirects to the Post page and checks the correct placeholder text and status' do
-    get '/users/1/posts/1'
-
-    expect(response).to render_template(:show)
-
-    expect(response.body).to include('Here is a post')
-
-    expect(response).to have_http_status(200)
-  end
-
-  it 'does not render a different template' do
-    get '/users/1/posts/1'
-
-    expect(response).to_not render_template(:index)
+    it 'test placeholder inside template' do
+      expect(response.body).to include('show post info')
+    end
   end
 end
