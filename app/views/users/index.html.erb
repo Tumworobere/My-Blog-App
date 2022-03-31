@@ -1,1 +1,18 @@
-<h1>show all users</h1>
+
+<ul id='users_section'>
+  <% @users.each do |user| %>
+    <li class='users-list'>
+
+      <%= link_to "/users/#{user.id}", :action => 'go' do %>
+      <div class='users_img'>
+      <img src=user.Photo>
+      </div>
+      <%end%>
+
+      <div class='user_item'>
+          <h2>User <%= user.Name %></h2>
+          <p class='posts-count'>Number of posts: <%= user.posts_counter %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>

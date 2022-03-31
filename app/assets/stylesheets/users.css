@@ -1,0 +1,40 @@
+
+.users-list {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+}
+
+.users_img {
+  border: 1px solid black;
+  width: 115px;
+  height: 115px;
+}
+
+.user_item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid black;
+  width: 400px;
+  height: 85px;
+}
+
+.posts-count {
+  position: relative;
+  font-size: 15px;
+  margin-left: 150px;
+  margin-top: 50px;
+}
+
+.user-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info {
+  display: inline;
+  border: 1px solid black;
+  width: 500px;
+}

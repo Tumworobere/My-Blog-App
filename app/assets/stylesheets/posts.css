@@ -1,0 +1,45 @@
+
+.user {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.photo {
+  border: 1px solid gray;
+  width: 5rem;
+  height: 5rem;
+}
+
+.user p {
+  position: relative;
+  top: 2rem;
+  margin: 1rem;
+}
+
+.posts-count {
+  margin-left: 5%;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: row;
+  width: 650px;
+  border: 1px solid black;
+}
+
+.commentslikes {
+  display: flex;
+  flex-direction: row;
+  margin-left: 200px;
+  font-size: 15px;
+}
+
+.post {
+  border: 1px solid black;
+  width: 700px;
+}
+
+ul li {
+  list-style: none;
+}

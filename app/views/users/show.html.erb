@@ -1,1 +1,31 @@
-<h1>show user info</h1>
+
+<div class='user-info'>
+<div class="user-header">
+<div class='users_img'><img src= @user.Photo></div>
+  <div class="user-info">
+    
+    <h2>User <%= @user.Name %></h2>
+    <p>Number of posts: <%= @user.posts_counter %></p>
+  </div>
+</div>
+  <div>
+    Bio:<p><%= @user.Bio %>...</p>
+  </div>
+
+  <ul class='posts'>
+    <% @posts_list.each do |u| %>
+    <div class='post'>
+      <h3>Post # <%= u.id %></h3>
+      <p> Text:<%= u.Text %></p>
+      <div>
+        Comments: <%= u.comments_counter %>
+        Likes: <%= u.likes_counter %>
+      </div>
+    </div>
+    <% end %>
+  </ul>
+  
+  <div>
+    <%= link_to "See all posts", "#{@user.id}/posts", class: "button" %>
+  </div>
+</div>
