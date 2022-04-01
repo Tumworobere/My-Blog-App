@@ -1,0 +1,68 @@
+.user-posts {
+  display: grid;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 40rem;
+}
+
+.posts {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.post-link {
+  color: black;
+}
+
+.recent-comms {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid black;
+  margin-top: 2px;
+}
+
+.comment {
+  padding-left: 1rem;
+}
+
+.post_contain {
+  display: grid;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.whole-post {
+  border: 1px solid black;
+  width: 50rem;
+  min-height: 25rem;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.post_header h3 {
+  margin-top: 0;
+}
+
+.whole-post p {
+  padding: 5px;
+}
+
+.comments-likes {
+  display: flex;
+  align-self: flex-end;
+  justify-content: space-between;
+}
+
+.comments-likes p {
+  margin: 5px 5px 0 5px;
+}
+
+.all-comms {
+  border: 1px solid black;
+  min-height: 20rem;
+  padding: 10px;
+}
