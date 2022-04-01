@@ -1,45 +1,68 @@
-
-.user {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
+.user-posts {
+  display: grid;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 40rem;
 }
 
-.photo {
-  border: 1px solid gray;
-  width: 5rem;
-  height: 5rem;
+.posts {
+  padding: 0;
+  margin-bottom: 0;
 }
 
-.user p {
-  position: relative;
-  top: 2rem;
-  margin: 1rem;
+.post-link {
+  color: black;
 }
 
-.posts-count {
-  margin-left: 5%;
-}
-
-.post-header {
-  display: flex;
-  flex-direction: row;
-  width: 650px;
+.recent-comms {
+  list-style-type: none;
+  padding: 0;
   border: 1px solid black;
+  margin-top: 2px;
 }
 
-.commentslikes {
-  display: flex;
-  flex-direction: row;
-  margin-left: 200px;
-  font-size: 15px;
+.comment {
+  padding-left: 1rem;
 }
 
-.post {
+.post_contain {
+  display: grid;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.whole-post {
   border: 1px solid black;
-  width: 700px;
+  width: 50rem;
+  min-height: 25rem;
 }
 
-ul li {
-  list-style: none;
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.post_header h3 {
+  margin-top: 0;
+}
+
+.whole-post p {
+  padding: 5px;
+}
+
+.comments-likes {
+  display: flex;
+  align-self: flex-end;
+  justify-content: space-between;
+}
+
+.comments-likes p {
+  margin: 5px 5px 0 5px;
+}
+
+.all-comms {
+  border: 1px solid black;
+  min-height: 20rem;
+  padding: 10px;
 }

@@ -1,31 +1,46 @@
 
-<div class='user-info'>
-<div class="user-header">
-<div class='users_img'><img src= @user.Photo></div>
-  <div class="user-info">
-    
-    <h2>User <%= @user.Name %></h2>
-    <p>Number of posts: <%= @user.posts_counter %></p>
-  </div>
-</div>
-  <div>
-    Bio:<p><%= @user.Bio %>...</p>
+
+<section class="user-profile">
+  <div class="header-user">
+
+    <div class='user-img'>
+      <img src=<%=@user.photo%>>
+    </div>
+
+    <div class="user_item">
+      <h2>User:<%=@user.name%></h2>
+      <p>Number of posts: <%=@user.posts_counter%></p>
+    </div>
+
+
   </div>
 
-  <ul class='posts'>
-    <% @posts_list.each do |u| %>
-    <div class='post'>
-      <h3>Post # <%= u.id %></h3>
-      <p> Text:<%= u.Text %></p>
-      <div>
-        Comments: <%= u.comments_counter %>
-        Likes: <%= u.likes_counter %>
-      </div>
-    </div>
-    <% end %>
-  </ul>
-  
+  <div class="bio-posts">
+    <p class="bio"> <%=@user.bio%> </p>
+
+    <ul class='recent-posts'>
+      
+      <%@list_post.each do |p|%>
+
+      <li class='post'>
+        <h3>Post # <%= p.id %></h3>
+        <p> Text :<%= p.text %></p>
+        <div>
+          Comments : <%= p.comments_counter %>
+          Likes : 0<%= p.likes_counter %>
+        </div>
+      </li>
+
+      <%end%>
+    </ul>
+
+
+  </div>
   <div>
     <%= link_to "See all posts", "#{@user.id}/posts", class: "button" %>
   </div>
-</div>
+
+
+
+
+</section>

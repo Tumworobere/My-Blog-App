@@ -1,18 +1,23 @@
+<div class="main">
 
-<ul id='users_section'>
-  <% @users.each do |user| %>
-    <li class='users-list'>
+  <ul class="users">
 
-      <%= link_to "/users/#{user.id}", :action => 'go' do %>
-      <div class='users_img'>
-      <img src=user.Photo>
+    <%@users.each do |user|%>
+
+    <li class="user">
+      <%=link_to "/users/#{user.id}",class: "user-img", :action => 'go' do%>
+      <div >
+        <img alt="<%= user.name %>'s photo" src=<%=user.photo%>>
       </div>
-      <%end%>
+      <% end %>
 
       <div class='user_item'>
-          <h2>User <%= user.Name %></h2>
-          <p class='posts-count'>Number of posts: <%= user.posts_counter %></p>
+        <h2>User <%= user.name %></h2>
+        <p class='posts-count'>Number of posts : <%= user.posts_counter %></p>
       </div>
+
     </li>
-  <% end %>
-</ul>
+    <%end%>
+
+  </ul>
+</div>
