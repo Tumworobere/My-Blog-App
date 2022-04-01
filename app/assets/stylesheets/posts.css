@@ -61,8 +61,61 @@
   margin: 5px 5px 0 5px;
 }
 
+.comments-likes .button {
+  font-size: 12px;
+}
+
 .all-comms {
   border: 1px solid black;
   min-height: 20rem;
   padding: 10px;
+}
+
+.new-post {
+  display: grid;
+  justify-content: center;
+  width: auto;
+}
+
+.create-post {
+  text-align: center;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-box,
+.text-box-contain {
+  display: flex;
+  margin-top: 2rem;
+  width: 30rem;
+  align-items: center;
+}
+
+.title-box input {
+  width: 20rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+
+.text-box {
+  width: 30rem;
+}
+
+.post-form .button {
+  margin-top: 2rem;
+}
+
+.comment-contain {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.comment-contain .button {
+  width: 20%;
+  margin: 2rem auto;
 }
