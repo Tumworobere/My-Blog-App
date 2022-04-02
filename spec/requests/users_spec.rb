@@ -2,34 +2,27 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   describe 'GET /index' do
-    before(:example) { get users_path }
-
-    it 'checks if action returns correct response status' do
-      expect(response).to have_http_status(:ok)
+    it 'should returns http 200 success' do
+      get users_path
+      expect(response).to have_http_status(200)
     end
 
-    it 'checks if action rendered a correct template' do
-      expect(response).to render_template('index')
-    end
-
-    it 'checks if correct placeholder is shown' do
-      expect(response.body).to include('User name')
+    it 'should include Number of posts' do
+      get users_path
+      expect(response.body).to include('Number of posts')
     end
   end
 
   describe 'GET /show' do
-    before(:example) { get user_path(10) }
+    user = User.create('name' => 'Mara', 'bio' => 'bio', 'photo' => 'Tom.png', 'posts_counter' => 0)
+    before(:each) { get user_path id: user.id }
 
-    it 'checks if action returns correct response status' do
-      expect(response).to have_http_status(:ok)
+    it 'should return correct response' do
+      expect(response).to have_http_status(200)
     end
 
-    it 'checks if action rendered a correct template' do
-      expect(response).to render_template('show')
-    end
-
-    it 'checks if correct placeholder is shown' do
-      expect(response.body).to include('User Details')
+    it 'should render the show template ' do
+      expect(response).to render_template(:show)
     end
   end
 end
