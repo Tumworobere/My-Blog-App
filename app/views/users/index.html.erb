@@ -1,27 +1,13 @@
-<div class="main">
-
-  <ul class="users">
-
-    <%@users.each do |user|%>
-
-    <li class="user">
-      <%=link_to "/users/#{user.id}",class: "user-img", :action => 'go' do%>
-      <div >
-        <img alt="<%= user.name %>'s photo" src=<%=user.photo%>>
+<% @users.each do |user| %>
+    <div class="user_c">
+      <div class="user_img">
+        <%= image_tag("Tom.png", width:'150px', height:'170px') %>
       </div>
-      <% end %>
-
-      <div class='user_item'>
-        <h2>User <%= user.name %></h2>
-        <p class='posts-count'>Number of posts : <%= user.posts_counter %></p>
+      <div class="user_data">
+        <%= link_to user_path(user.id) do %>
+        <h2><%= user.name%></h2>
+        <% end %>
+        <p>Number of posts: <%= user.posts_counter %></p>
       </div>
-
-    </li>
-    <%end%>
-
-  </ul>
-
-  <%=link_to "/users/1/posts/new",class: "new-form-btn", :action => 'go' do%>
- <button class="button">New Post</button>
+    </div>
   <%end%>
-</div>

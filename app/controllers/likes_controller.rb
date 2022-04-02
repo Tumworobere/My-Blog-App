@@ -5,7 +5,11 @@ class LikesController < ApplicationController
       user_id: current_user.id,
       post_id: @post.id
     )
-
-    redirect_to "/users/#{@post.user_id}/posts/#{@post.id}", notice: 'Like created' if new_like.save
+    new_like.update_likes_counter
+    if new_like.save
+      redirect_to "/users/#{@post.user_id}/posts/#{@post.id}", notice: 'Success!'
+    else
+      redirect_to "/users/#{@post.user_id}/posts/#{@post.id}", alert: 'Error occured!'
+    end
   end
 end

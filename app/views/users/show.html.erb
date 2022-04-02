@@ -1,46 +1,30 @@
-
-
-<section class="user-profile">
-  <div class="header-user">
-
-    <div class='user-img'>
-      <img src=<%=@user.photo%>>
-    </div>
-
-    <div class="user_item">
-      <h2>User:<%=@user.name%></h2>
-      <p>Number of posts: <%=@user.posts_counter%></p>
-    </div>
-
-
+<div class="user_c">
+  <div class="user_img">
+    <%= image_tag("Tom.png", width:'150px', height:'170px') %>
   </div>
-
-  <div class="bio-posts">
-    <p class="bio"> <%=@user.bio%> </p>
-
-    <ul class='recent-posts'>
-      
-      <%@list_post.each do |p|%>
-
-      <li class='post'>
-        <h3>Post # <%= p.id %></h3>
-        <p> Text :<%= p.text %></p>
-        <div>
-          Comments : <%= p.comments_counter %>
-          Likes : 0<%= p.likes_counter %>
-        </div>
-      </li>
-
-      <%end%>
-    </ul>
-
-
+  <div class="user_data">
+    <h2><%= @user.name%></h2>
+    <p>Number of posts: <%= @user.posts_counter%></p>
   </div>
-  <div>
-    <%= link_to "See all posts", "#{@user.id}/posts", class: "button" %>
+</div>
+
+<div class="user_c2">
+  <div class="user_data2">
+    <h2>Bio</h2>
+    <p class="bio"><%= @user.bio%></p>
   </div>
+</div>
 
+<% @user.recent_posts.each do |post| %>
+  <div class="comment_c">
+      <h2># Post : <%= post.title%></h2>
+      <p><%= post.text%></p>
+      <h3>Comment <%= post.comments_counter%>,  <span>Likes <%= post.likes_counter%></span></h3>
+  </div>
+<%end%>
 
-
-
-</section>
+<div class="button-div">
+  <button class="button">
+      <%= link_to "See all posts", user_posts_path(@user), {:class => "button_class"} %>
+  </button>
+</div>
