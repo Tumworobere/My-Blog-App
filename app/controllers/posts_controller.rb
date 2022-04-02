@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
+  before_action :current_user, only: [:create]
+
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:comments)
+    @posts_list = @user.posts.includes(:comments)
   end
 
   def show
+    @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
-    @user = @post.user
-    @comments = @post.comments
+    @comment = Comment.new
   end
 
   def new
@@ -15,17 +17,17 @@ class PostsController < ApplicationController
   end
 
   def create
-    @new_post = current_user.posts.new(post_params)
-    @new_post.likes_counter = 0
-    @new_post.comments_counter = 0
-    @new_post.update_posts_counter
+    new_p = current_user.posts.new(post_params)
+    new_p.likes_counter = 0
+    new_p.comments_counter = 0
     respond_to do |format|
       format.html do
-        if @new_post.save
-          redirect_to "/users/#{@new_post.user.id}/posts/", flash: { alert: 'Your post is saved' }
+        if new_p.save
+          flash[:success] = 'Post created successfully'
+          redirect_to "/users/#{current_user.id}/posts/"
         else
-          flash.now[:error] = 'Could not save post'
-          render action: 'new'
+          render :new
+          flash.now[:error] = 'Error: Post could not be saved'
         end
       end
     end
@@ -34,6 +36,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :text)
+    params.require(:post).permit(:Title, :Text)
   end
 end

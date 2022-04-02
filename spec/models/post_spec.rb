@@ -1,32 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe 'Post model' do
-    user = User.create(name: 'Tannah', bio: 'Software Dev')
-    subject do
-      Post.new(title: 'New post', text: 'Hi there', user_id: user)
-    end
-    before { subject.save }
+  describe ' Post model testing' do
+    testuser = User.new(Name: 'User1', Photo: 'https://unsplash.com/photos/Kcxv7Gz7wmw',
+                        Bio: 'Software developer from Uganda')
+    post = Post.new(user: testuser, Title: 'post title', Text: 'This is my post')
 
-    it 'check if the title is not blank' do
-      subject.title = nil
-      expect(subject).to_not be_valid
+    it 'post user should be testuser' do
+      expect(post.user).to be testuser
     end
 
-    it 'check if the title is not exceeding 250 characters' do
-      subject.title = 'Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world
-      Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello
-      world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world'
-      expect(subject).to_not be_valid
+    it 'Title Should be Present' do
+      post.Title = ''
+      expect(post).to_not be_valid
     end
 
-    it 'validates that likes counter is greater than or equal to 0' do
-      subject.likes_counter = -1
-      expect(subject).to_not be_valid
+    it 'Title Should have max 250 characters' do
+      post.Title = 'post title'
+      expect(post).to be_valid
+      post.Title = 'qwejfh ahfdo auhfoa ufoj jfaofu abhf ouabgf ioau faghfoau fgaofuga fouagfoaufga ouabgf
+    fo uahoaufdadaydgaydgawudyawgdkuaydgajkdguyaydgadyadluaidyagdluiaygduiwygfdluiaydgaiudygailywdgailydga
+    duahdiuawdghiauwgdh;iawudgy;iauydgh;aiuygwdiydugaiydgaludiaygdulaywfulidyauidyfguidagydiaduygaiydguaiyaugd'
+      expect(post).to_not be_valid
     end
 
-    it 'loads only the recent 5 comments' do
-      expect(subject.recent_comments).to eq(subject.comments.last(5))
+    it 'likes counter should be equal or greater than zero' do
+      post.likes_counter = -1
+      expect(post).to_not be_valid
+    end
+
+    it 'comments counter should be equal or greater than zero' do
+      post.comments_counter = -1
+      expect(post).to_not be_valid
+    end
+
+    it 'recent comments should return five last comments' do
+      user1 = User.new(Name: 'Useradada', Photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
+                       Bio: 'Software developer from lebanon')
+      post1 = Post.new(user: user1, Title: 'post', Text: 'This is my rocking post')
+
+      c1 = Comment.create(user: user1, post: post1, Text: 'Comment1')
+      c2 = Comment.create(user: user1, post: post1, Text: 'Comment2')
+      c3 = Comment.create(user: user1, post: post1, Text: 'Comment3')
+      c4 = Comment.create(user: user1, post: post1, Text: 'Comment4')
+      c5 = Comment.create(user: user1, post: post1, Text: 'Comment5')
+      c6 = Comment.create(user: user1, post: post1, Text: 'Comment6')
+      c7 = Comment.create(user: user1, post: post1, Text: 'Comment7')
+      expect(post1.recent_comments.length).to eq 5
+      expect(post1.recent_comments).to include c7, c6, c5, c4, c3
+      expect(post1.recent_comments).not_to include c1, c2
+      expect(post1.comments_counter).to eq 7
     end
   end
 end

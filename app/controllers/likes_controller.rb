@@ -5,11 +5,12 @@ class LikesController < ApplicationController
       user_id: current_user.id,
       post_id: @post.id
     )
-    new_like.update_likes_counter
     if new_like.save
-      redirect_to "/users/#{@post.user_id}/posts/#{@post.id}", flash: { alert: 'Your like is saved' }
+      flash[:success] = 'Like saved successfully'
+      redirect_to "/users/#{@post.user_id}/posts/#{@post.id}"
     else
-      redirect_to "/users/#{@post.user_id}/posts/#{@post.id}", flash.now[:error] = 'Could not save like'
+      render :new
+      flash.now[:error] = 'Error: Like could not be saved'
     end
   end
 end

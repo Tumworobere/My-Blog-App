@@ -1,34 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'User model' do
-    subject { User.new(name: 'Mara', photo: 'Tom.png', bio: 'bio', posts_counter: 0) }
-    before { subject.save }
-
-    it 'Check the name is not blank' do
-      subject.name = nil
-      expect(subject).to_not be_valid
-    end
-
-    it 'check if the posts_counter numeric' do
-      subject.posts_counter = ''
-      expect(subject).to_not be_valid
-    end
-
-    it 'check if the posts_counter greater than or equal to zero' do
-      expect(subject.posts_counter).to be >= 0
-    end
+  subject do
+    User.new(Name: 'User1', Photo: 'https://unsplash.com/photos/Kcxv7Gz7wmw', Bio: 'Software developer from Uganda')
   end
 
-  describe 'validates recent posts method' do
-    before do
-      4.times do |post|
-        Post.create(user_id: subject, title: "This is post #{post}", text: 'Lorem ipsum laoessh, riahe')
-      end
-    end
+  before { subject.save }
 
-    it 'shows three recent posts' do
-      expect(subject.recent_posts).to eq(subject.posts.last(3))
-    end
+  it 'Name Should be Present' do
+    subject.Name = nil
+    expect(subject).to_not be_valid
+  end
+
+  it 'Photo should be a string' do
+    subject.Photo = 'photo source'
+    expect(subject).to be_valid
+  end
+
+  it 'Posts counter should be equal or greater than zero' do
+    subject.posts_counter = -1
+    expect(subject).to_not be_valid
+  end
+
+  it 'recent posts method should return last three posts' do
+    post1 = Post.create(user: subject, Title: 'One', Text: 'first post')
+    post2 = Post.create(user: subject, Title: 'Two', Text: 'second post')
+    post3 = Post.create(user: subject, Title: 'Three', Text: 'third post')
+    post4 = Post.create(user: subject, Title: 'Four', Text: 'fourth post')
+    post5 = Post.create(user: subject, Title: 'Five', Text: 'fifth post')
+    expect(subject.posts_counter).to eq 5
+    expect(subject.recent_posts.length).to eq 3
+    expect(subject.recent_posts).to include post5, post4, post3
+    expect(subject.recent_posts).not_to include post1, post2
   end
 end
